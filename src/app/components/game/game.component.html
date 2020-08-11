@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width"/>
+  <title>Game Play</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+        integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+  <style>
+    /* -------------------- Page Styles (not required) */
+    div {
+      margin: 20px;
+    }
+
+    /* -------------------- Select Box Styles: bavotasan.com Method (with special adaptations by ericrasch.com) */
+    /* -------------------- Source: http://bavotasan.com/2011/style-select-box-using-only-css/ */
+    .styled-select {
+      background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+      height: 29px;
+      overflow: hidden;
+      width: 240px;
+    }
+
+    .styled-select select {
+      background: transparent;
+      border: none;
+      font-size: 14px;
+      height: 29px;
+      padding: 5px; /* If you add too much padding here, the options won't show in IE */
+      width: 268px;
+    }
+
+    .styled-select.slate {
+      background: url(http://i62.tinypic.com/2e3ybe1.jpg) no-repeat right center;
+      height: 34px;
+      width: 240px;
+    }
+
+    .styled-select.slate select {
+      border: 1px solid #ccc;
+      font-size: 16px;
+      height: 34px;
+      width: 268px;
+    }
+
+    /* -------------------- Rounded Corners */
+    .rounded {
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      border-radius: 20px;
+    }
+
+    .semi-square {
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+    }
+
+    /* -------------------- Colors: Background */
+    .slate {
+      background-color: #ddd;
+    }
+
+    .green {
+      background-color: #779126;
+    }
+
+    .blue {
+      background-color: #3b8ec2;
+    }
+
+    .yellow {
+      background-color: #eec111;
+    }
+
+    .black {
+      background-color: #000;
+    }
+
+    /* -------------------- Colors: Text */
+    .slate select {
+      color: #000;
+    }
+
+    .green select {
+      color: #fff;
+    }
+
+    .blue select {
+      color: #fff;
+    }
+
+    .yellow select {
+      color: #000;
+    }
+
+    .black select {
+      color: #fff;
+    }
+
+    /* -------------------- Select Box Styles: danielneumann.com Method */
+    /* -------------------- Source: http://danielneumann.com/blog/how-to-style-dropdown-with-css-only/ */
+    #mainselection select {
+      border: 0;
+      color: #EEE;
+      background: transparent;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 2px 10px;
+      width: 378px;
+      *width: 350px;
+      *background: #58B14C;
+      -webkit-appearance: none;
+    }
+
+    #mainselection {
+      overflow: hidden;
+      width: 350px;
+      -moz-border-radius: 9px 9px 9px 9px;
+      -webkit-border-radius: 9px 9px 9px 9px;
+      border-radius: 9px 9px 9px 9px;
+      box-shadow: 1px 1px 11px #330033;
+      background: #58B14C url("http://i62.tinypic.com/15xvbd5.png") no-repeat scroll 319px center;
+    }
+
+    /* -------------------- Select Box Styles: stackoverflow.com Method */
+    /* -------------------- Source: http://stackoverflow.com/a/5809186 */
+    select#soflow, select#soflow-color {
+      -webkit-appearance: button;
+      -webkit-border-radius: 2px;
+      -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+      -webkit-padding-end: 20px;
+      -webkit-padding-start: 2px;
+      -webkit-user-select: none;
+      background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+      background-position: 97% center;
+      background-repeat: no-repeat;
+      border: 1px solid #AAA;
+      color: #555;
+      font-size: inherit;
+      margin: 20px;
+      overflow: hidden;
+      padding: 5px 10px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 300px;
+    }
+
+    select#soflow-color {
+      color: #fff;
+      background-image: url(http://i62.tinypic.com/15xvbd5.png), -webkit-linear-gradient(#779126, #779126 40%, #779126);
+      background-color: #779126;
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      border-radius: 20px;
+      padding-left: 15px;
+    }
+  </style>
+</head>
+<body [style.background]="'url(/assets/images/maze.jpg)'">
+<div class="container body-content">
+  <div class="container">
+    <div class="row justify-content-start" style="padding-top:10px;">
+      <div class="modal-header" style="padding-top:10px;font-size:2vw;color:black">
+        <label>Welcome to world navigator</label>
+      </div>
+    </div>
+    <div class="float-right" style="color:#040505;font-size: 25px">
+      <label>Active users</label>
+      <ul class="list-group">
+        <li *ngFor="let user of users" [value]="user">{{user}}</li>
+      </ul>
+    </div>
+    <div class="row justify-content-center" style="padding-top:10px;font-weight: 900;">
+      <span class="input100" style="color:#040505">Result:</span>
+      <span class="input100" style="color:#040505">{{result}}</span>
+
+      <ul>
+        <li ng-repeat="user in users"></li>
+      </ul>
+    </div>
+    <span class="input100" style="color:#040505">Commands:</span>
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+      <div>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="backward()" [disabled]="tie">backward</button>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="forward()" [disabled]="tie">forward</button>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="left()" [disabled]="tie">left</button>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="right()" [disabled]="tie">right</button>
+        <br><br>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="look()" [disabled]="tie">look</button>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="status()" [disabled]="tie">status</button>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="checkDoor()" [disabled]="tie">check door</button>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="useDoorKey()" [disabled]="tie">use door key</button>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="checkChest()" [disabled]="tie">check chest</button>
+        <br><br>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="useChestKey()" [disabled]="tie">use chest key
+        </button>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="checkMirror()" [disabled]="tie">check mirror</button>
+      </div>
+      <div>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="checkPainting()" [disabled]="tie">check painting
+        </button>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="trade()" [disabled]="tie">trade</button>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="list()" [disabled]="tie">list</button>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="buy()" [disabled]="tie">buy</button>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="sell()" [disabled]="tie">sell</button>
+        <br><br>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="finishTrade()" [disabled]="tie">finish trade</button>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="useFlashlight()" [disabled]="tie">use flashlight
+        </button>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="switchLights()" [disabled]="tie">switch lights
+        </button>
+        <button type="submit" class="btn btn-dark btn-lg" (click)="help()" [disabled]="tie">help</button>
+      </div>
+      <div *ngIf="showItems">
+        <label for="items">Choose an item:</label>
+        <select name="items" id="items" class="form-control" [(ngModel)]="extraParam" *ngIf="!tie" ngDefaultControl>
+          <option *ngFor="let item of items" [value]="item">{{item}}</option>
+        </select>
+      </div>
+
+      <div *ngIf="tie">
+        <label for="tie">Choose an option:</label>
+        <select name="tie" id="tie" class="form-control" [(ngModel)]="chosen" ngDefaultControl>
+          <option *ngFor="let option of fightOptions" [value]="option">{{option}}</option>
+        </select>
+        <div class="col" style="padding-top:10px;">
+          <form>
+            <button name="command" (click)="picked()" value="aa" class="btn btn-primary" id="pick" [disabled]="pick">
+              pick
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+</body>
+</html>
