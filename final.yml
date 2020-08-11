@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+     name: final
+     labels:
+      app: final
+spec:
+     replicas: 2
+     selector:
+       matchLabels:
+        app: final
+     template:
+      metadata:
+        labels:
+          app: final
+      spec:
+        containers:
+        - name: final
+          image: farajalboriny/worldnavigator
+          ports:
+          - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+
+
+  name: final
+spec:
+  type: ClusterIP
+  ports:
+
+  - port: 8080
+    protocol: TCP
+  selector:
+    app: final
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: final2
+spec:
+  type: LoadBalancer
+  ports:
+   - port: 8080
+     protocol: TCP
+  selector:
+    app: final
+
