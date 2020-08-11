@@ -23,7 +23,7 @@ export class ManagerService {
     this.requestResponse = new Requestresponse()
     this.requestResponse.command = param;
     this.requestResponse.userName = localStorage.getItem('USER');
-    return this.httpClient.post<Fetch>('http://localhost:8080/fetch', this.requestResponse);
+    return this.httpClient.post<Fetch>('http://backend-592385535.us-east-2.elb.amazonaws.com/fetch', this.requestResponse);
   }
 
   checkIfLost(fetch: Fetch) {
@@ -39,7 +39,7 @@ export class ManagerService {
     this.fightInfo.chosen = chosen
     this.fightInfo.userName = localStorage.getItem('USER')
 
-     return this.httpClient.post<Response>('http://localhost:8080/fight', this.fightInfo);
+     return this.httpClient.post<Response>('http://backend-592385535.us-east-2.elb.amazonaws.com/fight', this.fightInfo);
   }
 
 
