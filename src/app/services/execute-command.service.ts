@@ -17,7 +17,7 @@ export class ExecuteCommandService {
     this.requestResponse = new Requestresponse()
     this.requestResponse.command = selectedQuantity;
     this.requestResponse.userName = localStorage.getItem('USER');
-    return this.httpClient.post<Response>('http://localhost:8080/execute', this.requestResponse);
+    return this.httpClient.post<Response>('http://backend-592385535.us-east-2.elb.amazonaws.com/execute', this.requestResponse);
   }
 
   async quit(quit: string) {
@@ -26,7 +26,7 @@ export class ExecuteCommandService {
     this.requestResponse.userName = localStorage.getItem('USER');
     localStorage.removeItem('USER')
     localStorage.setItem('Logged', '')
-    return await this.httpClient.post<Response>('http://localhost:8080/execute', this.requestResponse).toPromise();
+    return await this.httpClient.post<Response>('http://backend-592385535.us-east-2.elb.amazonaws.com/execute', this.requestResponse).toPromise();
 
   }
 
