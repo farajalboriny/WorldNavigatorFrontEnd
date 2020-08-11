@@ -3,9 +3,9 @@ FROM node:12.7-alpine AS build-stage
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
-ARG configuration=production
 COPY . .
-RUN npm run build -- --output-path=/dist/out --configuration $configuration
+ARG configuration=production
+RUN npm run build -- --output-path=./dist/out --configuration $configuration
 
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx
 FROM nginx:1.15
