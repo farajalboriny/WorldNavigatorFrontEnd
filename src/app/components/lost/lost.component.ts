@@ -14,6 +14,7 @@ export class LostComponent implements OnInit {
   }
 
   routToLogin() {
+    localStorage.clear()
     this.router.navigate(['login'])
   }
 }
