@@ -11,6 +11,6 @@ export class RegisterService {
   constructor(private httpClient:HttpClient) { }
 
   register(user:User):Observable<User> {
-    return this.httpClient.post<User>('http://localhost:8080/register',user);
+    return this.httpClient.post<User>('http://3.129.208.173:8000/register',user);
   }
 }
