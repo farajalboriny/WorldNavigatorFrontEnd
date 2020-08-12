@@ -68,7 +68,7 @@ export class GameComponent implements OnInit {
 
   fetchUsers() {
 
-    (this.managerService.fetch('get').toPromise()
+    (this.managerService.fetch().toPromise()
       .then((res) => this.fetch = res)
       .catch((err) => console.log(err)))
     this.users = this.fetch.activeUsers
@@ -83,11 +83,14 @@ export class GameComponent implements OnInit {
     } else {
       this.managerService.checkIfLost(this.fetch)
     }
-    if(this.tie!=this.fetch.tie){
-      this.tie=this.fetch.tie;
+    if (this.tie != this.fetch.tie) {
+      this.tie = this.fetch.tie;
 
     }
     setTimeout(() => {
+       if(this.fetch.lost){
+         stop()
+       }
         this.fetchUsers()
       }, 1000
     );

@@ -19,27 +19,28 @@ export class ManagerService {
   fightInfo: Fight
 
 
-  fetch(param: string) {
+  fetch() {
     this.requestResponse = new Requestresponse()
-    this.requestResponse.command = param;
+    this.requestResponse.command = '';
     this.requestResponse.userName = localStorage.getItem('USER');
     return this.httpClient.post<Fetch>('http://localhost:8080/fetch', this.requestResponse);
   }
 
   checkIfLost(fetch: Fetch) {
-    if (fetch.lost) {
-      localStorage.clear();
-      this.router.navigate(['/lost'])
-      localStorage.clear()
+    if (localStorage.getItem('USER') != null) {
+      if (fetch.lost) {
+        localStorage.clear();
+        this.router.navigate(['/lost'])
+      }
     }
   }
 
-   fight(chosen: string) {
+  fight(chosen: string) {
     this.fightInfo = new Fight()
     this.fightInfo.chosen = chosen
     this.fightInfo.userName = localStorage.getItem('USER')
 
-     return this.httpClient.post<Response>('http://localhost:8080/fight', this.fightInfo);
+    return this.httpClient.post<Response>('http://localhost:8080/fight', this.fightInfo);
   }
 
 
