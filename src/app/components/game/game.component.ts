@@ -88,9 +88,7 @@ export class GameComponent implements OnInit {
 
     }
     setTimeout(() => {
-       if(this.fetch.lost){
-         stop()
-       }
+     
         this.fetchUsers()
       }, 1000
     );
