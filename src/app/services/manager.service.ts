@@ -26,13 +26,12 @@ export class ManagerService {
     return this.httpClient.post<Fetch>('http://3.129.208.173:8000/fetch', this.requestResponse);
   }
 
-  checkIfLost(fetch: Fetch) {
-    if (fetch.lost) {
-      localStorage.clear();
-      this.router.navigate(['/lost'])
-      localStorage.clear()
+  if (localStorage.getItem('USER') != null) {
+      if (fetch.lost) {
+        localStorage.clear();
+        this.router.navigate(['/lost'])
+      }
     }
-  }
 
    fight(chosen: string) {
     this.fightInfo = new Fight()
