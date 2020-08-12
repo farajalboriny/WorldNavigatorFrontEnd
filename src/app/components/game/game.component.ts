@@ -84,8 +84,8 @@ export class GameComponent implements OnInit {
       this.managerService.checkIfLost(this.fetch)
     }
     if(this.tie!=this.fetch.tie){
+      this.result='you faced a player and there is a tie please pick quickly or you will lose';
       this.tie=this.fetch.tie;
-
     }
     setTimeout(() => {
         this.fetchUsers()
