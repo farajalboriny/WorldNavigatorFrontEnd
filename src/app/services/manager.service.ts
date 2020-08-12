@@ -19,9 +19,9 @@ export class ManagerService {
   fightInfo: Fight
 
 
-  fetch(param: string) {
+  fetch() {
     this.requestResponse = new Requestresponse()
-    this.requestResponse.command = param;
+    this.requestResponse.command = '';
     this.requestResponse.userName = localStorage.getItem('USER');
     return this.httpClient.post<Fetch>('http://3.129.208.173:8000/fetch', this.requestResponse);
   }
