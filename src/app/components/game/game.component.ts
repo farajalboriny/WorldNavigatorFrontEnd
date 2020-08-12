@@ -85,7 +85,7 @@ export class GameComponent implements OnInit {
     }
     if (this.tie != this.fetch.tie) {
       this.tie = this.fetch.tie;
-      
+
     }
     setTimeout(() => {
        if(this.fetch.lost){
